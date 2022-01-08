@@ -5,7 +5,7 @@ import 'package:fluttercurrencyapp/models/currency_set.dart';
 
 class CurrencyHttpRepository {
   static String URL =
-    "http://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,BTC-BRL";
+    "https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,GBP-BRL,BTC-BRL,ETH-BRL";
   
   static Future<CurrencySet> fetchCurrency() async {
     final response = await http.get(Uri.parse(URL));

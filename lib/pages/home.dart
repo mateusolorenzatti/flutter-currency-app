@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttercurrencyapp/messages/error_message.dart';
 import 'package:fluttercurrencyapp/models/currency_set.dart';
+import 'package:fluttercurrencyapp/widgets/currency_item.dart';
 
 import '../repository/currency_http_repository.dart';
 
@@ -36,18 +38,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 CurrencySet? currency = snapshot.data;
                 return ListView(
                   children: [
-                    ListTile(
-                      title: Text("${currency?.uSDBRL?.code} / ${currency?.uSDBRL?.codein} : ${currency?.uSDBRL?.bid}", style: TextStyle(fontWeight: FontWeight.bold)),
-                      subtitle: Text("${currency?.uSDBRL?.createDate}"),
-                    ),
-                    ListTile(
-                      title: Text("${currency?.eURBRL?.code} / ${currency?.eURBRL?.codein} : ${currency?.eURBRL?.bid}",  style: TextStyle(fontWeight: FontWeight.bold)),
-                      subtitle: Text("${currency?.eURBRL?.createDate}"),
-                    ),
-                    ListTile(
-                      title: Text("${currency?.bTCBRL?.code} / ${currency?.bTCBRL?.codein} : ${currency?.bTCBRL?.bid}", style: TextStyle(fontWeight: FontWeight.bold)),
-                      subtitle: Text("${currency?.bTCBRL?.createDate}"),
-                    ),
+                    CurrencyItem(currency: currency?.uSDBRL,),
+                    CurrencyItem(currency: currency?.eURBRL,),
+                    CurrencyItem(currency: currency?.gBPBRL,),
+                    CurrencyItem(currency: currency?.bTCBRL,),
+                    CurrencyItem(currency: currency?.eTHBRL,),
                   ],
                 );
               }
@@ -59,14 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
               // TODO: Handle this case.
               break;
           }
-          return Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.warning_amber_rounded, size: 60.0),
-              Text('Erro ao buscar os Dados', textScaleFactor: 2),
-            ],
-          ));
+          return const ErrorMessage(message: "Ocorreu um erro ao buscar os dados!", icon: Icons.error_outline);
         },
       ),
     );
